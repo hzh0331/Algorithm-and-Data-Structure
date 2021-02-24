@@ -10,13 +10,13 @@ public class DoubleLinkedListDemo {
         HeroNode2 heroNode5 = new HeroNode2(2, "test", "test");
 
         DoubleLinkedList heros = new DoubleLinkedList();
-        heros.add(heroNode1);
-        heros.add(heroNode2);
-        heros.add(heroNode3);
-        heros.add(heroNode4);
+        heros.addInOrder(heroNode4);
+        heros.addInOrder(heroNode2);
+        heros.addInOrder(heroNode3);
+        heros.addInOrder(heroNode1);
 //        heros.addInOrder(heroNode4);
 
-        heros.update(heroNode5);
+//        heros.update(heroNode5);
 //        heros.remove(3);
 
         heros.print();
@@ -37,6 +37,25 @@ class DoubleLinkedList{
     public void add(HeroNode2 heroNode2){
         HeroNode2 temp = head;
         while (temp.getNext() != null){
+            temp = temp.getNext();
+        }
+        temp.setNext(heroNode2);
+        heroNode2.setPrevious(temp);
+    }
+
+    public void addInOrder(HeroNode2 heroNode2){
+        HeroNode2 temp = head;
+        while (temp.getNext() != null){
+            if (temp.getNext().getRank() > heroNode2.getRank()){
+                temp.getNext().setPrevious(heroNode2);
+                heroNode2.setNext(temp.getNext());
+                heroNode2.setPrevious(temp);
+                temp.setNext(heroNode2);
+                return;
+            }else if(temp.getNext().getRank() == heroNode2.getRank()){
+                System.out.println("the rank is already existed");
+                return;
+            }
             temp = temp.getNext();
         }
         temp.setNext(heroNode2);
