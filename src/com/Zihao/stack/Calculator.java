@@ -22,7 +22,7 @@ public class Calculator {
         }
     }
 
-    private static String removeParentheses(String expression){
+    public static String removeParentheses(String expression){
         String result = "";
         int i = 0;
         int start = 0;
