@@ -4,34 +4,8 @@ import java.util.Arrays;
 
 public class Calculator {
     public static void main(String[] args){
-        String expression = "3*2*6-5";
-        CalculatorStack numberStack = new CalculatorStack(expression.length());
-        CalculatorStack operatorStack = new CalculatorStack(expression.length());
-        int num1 = 0;
-        int num2 = 0;
-//        int res = 0;
-        char current = ' ';
-        for (int i = 0; i < expression.length(); i++){
-            current = expression.charAt(i);
-            if (isOperator(current)){
-                if (operatorStack.isEmpty() || (priority(current) > priority(operatorStack.peek()))){
-                    operatorStack.push(current);
-                }else {
-                    num1 = numberStack.pop();
-                    num2 = numberStack.pop();
-                    numberStack.push(calculate(num1, num2, operatorStack.pop()));
-                    operatorStack.push(current);
-                }
-            }else{
-                numberStack.push(current - 48);
-            }
-        }
-        while (!operatorStack.isEmpty()){
-            num1 = numberStack.pop();
-            num2 = numberStack.pop();
-            numberStack.push(calculate(num1, num2, operatorStack.pop()));
-        }
-        System.out.println("the result is " + numberStack.pop());
+        String expression = "3+2*6-15";
+        System.out.println(removeParentheses("(3*2)+5"));
     }
 
     private static boolean isOperator(char current){
@@ -46,6 +20,65 @@ public class Calculator {
         }else{
             throw new RuntimeException("this char is not a operator");
         }
+    }
+
+    private static String removeParentheses(String expression){
+        String result = "";
+        int i = 0;
+        int start = 0;
+        int end;
+        while (i < expression.length()){
+            if (expression.charAt(i) == '('){
+                start = i;
+                while(expression.charAt(i) != ')'){
+                    i++;
+                }
+                end = i;
+                result += String.valueOf(calculateWithoutParentheses(expression.substring(start+1, end)));
+            }else{
+                result += expression.charAt(i);
+            }
+            i++;
+        }
+        return  result;
+    }
+
+    private static int calculateWithoutParentheses(String expression){
+        CalculatorStack numberStack = new CalculatorStack(expression.length());
+        CalculatorStack operatorStack = new CalculatorStack(expression.length());
+        String number = "";
+        int num1 = 0;
+        int num2 = 0;
+//        int res = 0;
+        char current = ' ';
+        for (int i = 0; i < expression.length(); i++){
+            current = expression.charAt(i);
+            if (isOperator(current)){
+                numberStack.push(Integer.parseInt(number));
+                number = "";
+                if (operatorStack.isEmpty() || (priority(current) > priority(operatorStack.peek()))){
+                    operatorStack.push(current);
+                }else {
+                    num1 = numberStack.pop();
+                    num2 = numberStack.pop();
+                    numberStack.push(calculate(num1, num2, operatorStack.pop()));
+                    operatorStack.push(current);
+                }
+            }else{
+                number += current - 48;
+//                numberStack.push(current - 48);
+            }
+        }
+        if (!number.equals("")){
+            numberStack.push(Integer.parseInt(number));
+            number = "";
+        }
+        while (!operatorStack.isEmpty()){
+            num1 = numberStack.pop();
+            num2 = numberStack.pop();
+            numberStack.push(calculate(num1, num2, operatorStack.pop()));
+        }
+        return numberStack.pop();
     }
 
     private static int calculate(int num1, int num2, int operator){
