@@ -1,7 +1,7 @@
 package com.Zihao.sort;
 
 public class InsertionSort {
-    public static void InsertionSort(int[] list){
+    public static void insertionSort(int[] list){
         int insertValue = 0;
         int insertIndex = 0;
         for (int i = 1; i < list.length; i++){
