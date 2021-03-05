@@ -1,4 +1,4 @@
-package com.Zihao.HashTab;
+package com.Zihao.hashTab;
 
 public class HashTabDemo {
 }
