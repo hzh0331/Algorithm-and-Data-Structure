@@ -1,4 +1,4 @@
-package test.com.Zihao.binarySearch; 
+package test.com.Zihao.search;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,8 +8,8 @@ import org.junit.After;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.Zihao.binarySearch.BinarySearchDemo.binarySearch;
-import static com.Zihao.binarySearch.BinarySearchDemo.binarySearchWithMultipleResults;
+import static com.Zihao.search.BinarySearchDemo.binarySearch;
+import static com.Zihao.search.BinarySearchDemo.binarySearchWithMultipleResults;
 
 
 /** 

@@ -1,4 +1,4 @@
-package com.Zihao.binarySearch;
+package com.Zihao.search;
 
 import java.util.ArrayList;
 import java.util.List;
