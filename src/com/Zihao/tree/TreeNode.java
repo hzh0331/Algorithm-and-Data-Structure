@@ -138,4 +138,22 @@ public class TreeNode<T> {
 
         return null;
     }
+
+    public boolean remove(T value){
+        if (this.left != null && this.left.getValue() == value){
+            this.left = null;
+            return true;
+        }
+
+        if (this.right != null && this.right.getValue() == value){
+            this.right = null;
+            return true;
+        }
+
+        if (this.left != null && this.left.remove(value)) return true;
+
+        if (this.right != null && this.right.remove(value)) return true;
+
+        return false;
+    }
 }

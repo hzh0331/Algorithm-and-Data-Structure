@@ -49,4 +49,14 @@ public class BinaryTree<T> {
         }
         return null;
     }
+
+    public boolean remove(T value){
+        if (root.getValue() == value){
+            root = null;
+            return true;
+        }
+        return root.remove(value);
+    }
+
+
 }
