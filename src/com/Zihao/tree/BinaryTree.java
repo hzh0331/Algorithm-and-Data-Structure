@@ -1,6 +1,6 @@
 package com.Zihao.tree;
 
-public class BinaryTree {
+public class BinaryTree<T> {
     private TreeNode root;
 
     public TreeNode getRoot() {
@@ -27,5 +27,26 @@ public class BinaryTree {
         if (root != null){
             root.postOrder();
         }
+    }
+
+    public TreeNode preOrderSearch(T value){
+        if (root != null){
+            return root.preOrderSearch(value);
+        }
+        return null;
+    }
+
+    public TreeNode infixOrderSearch(T value){
+        if (root != null){
+            return root.infixOrderSearch(value);
+        }
+        return null;
+    }
+
+    public TreeNode postOrderSearch(T value){
+        if (root != null){
+            return root.postOrderSearch(value);
+        }
+        return null;
     }
 }

@@ -102,4 +102,32 @@ public void testOrder() throws Exception{
 
 }
 
+@Test
+public void testSearch() throws Exception{
+    BinaryTree binaryTree = new BinaryTree();
+
+    TreeNode<Integer> root = new TreeNode<>(1);
+    TreeNode<Integer> treeNode1 = new TreeNode<>(2);
+    TreeNode<Integer> treeNode2 = new TreeNode<>(3);
+    TreeNode<Integer> treeNode3 = new TreeNode<>(4);
+    TreeNode<Integer> treeNode4 = new TreeNode<>(5);
+
+    root.setLeft(treeNode1);
+    root.setRight(treeNode2);
+
+    treeNode2.setRight(treeNode3);
+    treeNode2.setLeft(treeNode4);
+
+    binaryTree.setRoot(root);
+
+    System.out.println(binaryTree.preOrderSearch(1));
+    System.out.println(binaryTree.preOrderSearch(6));
+
+    System.out.println(binaryTree.infixOrderSearch(1));
+    System.out.println(binaryTree.infixOrderSearch(6));
+
+    System.out.println(binaryTree.postOrderSearch(1));
+    System.out.println(binaryTree.postOrderSearch(6));
+}
+
 } 

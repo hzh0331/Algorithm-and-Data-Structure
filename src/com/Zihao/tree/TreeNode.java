@@ -69,4 +69,73 @@ public class TreeNode<T> {
         }
         System.out.print(this.toString()+ " ");
     }
+
+    public TreeNode preOrderSearch(T value){
+        if (this.value == value){
+            return this;
+        }
+
+        TreeNode result = null;
+
+        if (this.left != null){
+            result = this.left.preOrderSearch(value);
+        }
+
+        if (result != null){
+            return result;
+        }
+
+        if (this.right != null){
+            result = this.right.preOrderSearch(value);
+        }
+
+        return result;
+    }
+
+    public TreeNode infixOrderSearch(T value){
+        TreeNode result = null;
+
+        if (this.left != null){
+            result = this.left.infixOrderSearch(value);
+        }
+
+        if (result != null){
+            return result;
+        }
+
+        if (this.value == value){
+            return this;
+        }
+
+        if (this.right != null){
+            result = this.right.infixOrderSearch(value);
+        }
+
+        return result;
+    }
+
+    public TreeNode postOrderSearch(T value){
+        TreeNode result = null;
+
+        if (this.left != null){
+            result = this.left.postOrderSearch(value);
+        }
+
+        if (result != null){
+            return result;
+        }
+
+        if (this.right != null){
+            result = this.right.postOrderSearch(value);
+        }
+
+        if (result != null){
+            return result;
+        }
+        if (this.value == value){
+            return this;
+        }
+
+        return null;
+    }
 }
