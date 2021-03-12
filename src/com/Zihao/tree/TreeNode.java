@@ -2,8 +2,8 @@ package com.Zihao.tree;
 
 public class TreeNode<T> {
     private T value;
-    private TreeNode left;
-    private TreeNode right;
+    protected TreeNode left;
+    protected TreeNode right;
 
     public T getValue() {
         return value;
