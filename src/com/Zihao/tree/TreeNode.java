@@ -54,6 +54,7 @@ public class TreeNode<T> {
         if (this.left != null ){
             this.left.infixOrder();
         }
+//        System.out.println("aaaaa");
         System.out.print(this.toString()+ " ");
         if (this.right != null){
             this.right.infixOrder();
