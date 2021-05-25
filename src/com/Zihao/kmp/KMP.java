@@ -8,7 +8,7 @@ public class KMP {
                 j = next[j-1];
             }
 
-            if (s1.charAt(i) != s2.charAt(j)) j++;
+            if (s1.charAt(i) == s2.charAt(j)) j++;
             if (j == s2.length()) return i-j+1;
         }
         return -1;
@@ -21,9 +21,15 @@ public class KMP {
                 j = result[j-1];
             }
 
-            if (dest.charAt(i) != dest.charAt(j)) j++;
+            if (dest.charAt(i) == dest.charAt(j)) j++;
             result[i] = j;
         }
         return  result;
+    }
+
+
+    public static void main(String[] args){
+        KMP kmp = new KMP();
+        System.out.println(kmp.kmp("mississippi", "issip"));
     }
 }
