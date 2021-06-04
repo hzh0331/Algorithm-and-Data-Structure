@@ -1,6 +1,10 @@
 package com.Zihao.tree;
 
-public class BinaryTree<T> extends Tree<T> {
+public class BinaryTree<T extends Comparable<T>> extends Tree<T> {
+
+    public BinaryTree() {
+        super();
+    }
 
     public BinaryTree(Node<T> root) {
         super(root);
