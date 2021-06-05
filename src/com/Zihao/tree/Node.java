@@ -36,6 +36,10 @@ public class Node<T extends Comparable<T>> {
         this.right = right;
     }
 
+    public int getHeight(){
+        return Math.max(left == null ? 0 : left.getHeight(), right == null ? 0 : right.getHeight()) + 1;
+    }
+
     public void inOrderTraversal(){
         if(left != null) left.inOrderTraversal();
         System.out.print(this.toString() + " ");

@@ -33,43 +33,46 @@ public class BinarySortTree<T extends Comparable<T>> extends Tree<T> {
     @Override
     public boolean remove(T value) {
         if(root != null){
-            return remove(root, value).getKey();
+            return remove(null, root, value);
         }
         return false;
     }
 
-    public Pair<Boolean, Node<T>> remove(Node<T> node, T value){
-        if (node == null){
-            return new Pair<Boolean, Node<T>>(false, null);
-        }
-        Pair<Boolean, Node<T>> result;
+    public boolean remove(Node<T> parent, Node<T> node, T value){
         if(node.getValue().compareTo(value) > 0){
-            result = remove(node.getLeft(), value);
-            node.setLeft(result.getValue());
-            return new Pair<Boolean, Node<T>>(result.getKey(), node);
+            if (node.getLeft() == null) return false;
+            else return remove(node, node.getLeft(), value);
         }else if(node.getValue().compareTo(value) < 0){
-            result = remove(node.getRight(), value);
-            node.setRight(result.getValue());
-            return new Pair<Boolean, Node<T>>(result.getKey(), node);
+            if (node.getRight() == null) return false;
+            else return remove(node, node.getRight(), value);
         }else{
-            if (node.getLeft() == null)
-                return new Pair<Boolean, Node<T>>(true, node.getRight());
-            else if(node.getRight() == null){
-                return new Pair<Boolean, Node<T>>(true, node.getLeft());
-            }
-
-            Node<T> temp = node.getRight();
-            if(temp.getLeft() != null){
-               while (temp.getLeft().getLeft() != null){
-                   temp = temp.getLeft();
-               }
-               node.setValue(temp.getLeft().getValue());
-               temp.setLeft(null);
+            if (node.getLeft() != null && node.getRight() != null){
+                Node<T> temp = node.getRight();
+                if (temp.getLeft() != null)
+                    node.setValue(removeTheMin(temp));
+                else {
+                    node.setValue(temp.getValue());
+                    node.setRight(temp.getRight());
+                }
+            }else if(parent == null){
+                if (root.getRight() != null) root = root.getRight();
+                else if (root.getLeft() != null) root = root.getLeft();
+                else root = null;
+            } else if (parent.getRight() == node){
+                parent.setRight(node.getLeft() == null ? node.getRight() : node.getLeft());
             }else{
-                node.setValue(temp.getValue());
-                node.setRight(temp.getRight());
+                parent.setLeft(node.getLeft() == null ? node.getRight() : node.getLeft());
             }
-            return new Pair<Boolean, Node<T>>(true, node);
+            return true;
         }
+    }
+
+    public T removeTheMin(Node<T> node){
+        T result;
+        while (node.getLeft().getLeft() != null)
+            node = node.getLeft();
+        result = node.getLeft().getValue();
+        node.setLeft(node.getLeft().getRight());
+        return result;
     }
 }
