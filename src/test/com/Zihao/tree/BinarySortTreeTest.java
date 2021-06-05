@@ -84,6 +84,28 @@ public void testRemoveValue() throws Exception {
     System.out.println();
     binarySortTree.remove(50);
     binarySortTree.inOrderTraversal();
+    System.out.println();
+
+    binarySortTree = new BinarySortTree<>();
+    binarySortTree.add(4);
+    binarySortTree.add(2);
+    binarySortTree.add(6);
+    binarySortTree.add(1);
+    binarySortTree.add(3);
+    binarySortTree.add(5);
+    binarySortTree.add(7);
+
+    binarySortTree.remove(1);
+    binarySortTree.inOrderTraversal();
+    System.out.println();
+    binarySortTree.remove(5);
+    binarySortTree.inOrderTraversal();
+    System.out.println();
+    binarySortTree.remove(4);
+    binarySortTree.inOrderTraversal();
+    System.out.println();
+    binarySortTree.remove(7);
+    binarySortTree.inOrderTraversal();
 } 
 
 /** 
